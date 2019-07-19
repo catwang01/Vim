@@ -94,7 +94,7 @@ call plug#begin('~/.vim/plugins')
     Plug 'https://github.com/easymotion/vim-easymotion'
     Plug 'https://github.com/flazz/vim-colorschemes'
     Plug 'godlygeek/tabular'
-    Plug 'https://github.com/vim-scripts/vim-auto-save'
+    " Plug 'https://github.com/vim-scripts/vim-auto-save'
     Plug 'plasticboy/vim-markdown'
 call plug#end()
 
@@ -150,5 +150,5 @@ call plug#end()
 "
 "
 "{{{ vim-auto-save
-    let g:auto_save = 1
+    " let g:auto_save = 1
 "}}}
