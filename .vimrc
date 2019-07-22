@@ -152,3 +152,15 @@ call plug#end()
 "{{{ vim-auto-save
     " let g:auto_save = 1
 "}}}
+"
+"
+"{{{ nagivate in the windows
+    " 向下移动
+    nnoremap <space>j <c-w>j
+    " 向上移动
+    nnoremap <space>k <c-w>k
+    " 向左移动
+    nnoremap <space>h <c-w>h
+    " 向右移动
+    nnoremap <space>l <c-w>l
+"}}}
