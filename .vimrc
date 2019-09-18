@@ -85,8 +85,12 @@ set encoding=utf8
 let mapleader=','
 " Plugin
 call plug#begin('~/.vim/plugins')
+    Plug 'vim-latex/vim-latex'
     Plug 'https://github.com/scrooloose/nerdtree'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    Plug 'xuhdev/vim-latex-live-preview'
+    Plug 'https://github.com/sirver/ultisnips'
+    Plug 'honza/vim-snippets'
     Plug 'https://github.com/dhruvasagar/vim-table-mode'
     Plug 'https://github.com/tpope/vim-surround'
     Plug 'https://github.com/scrooloose/nerdcommenter'
@@ -163,4 +167,31 @@ call plug#end()
     nnoremap <space>h <c-w>h
     " 向右移动
     nnoremap <space>l <c-w>l
+"}}}
+
+
+" {{{ vim-latex-preview
+    autocmd Filetype tex setl updatetime=1000
+    let g:livepreview_previewer = 'open -a skim'
+    let g:livepreview_engine = 'xelatex --shell-escape'
+" }}}
+"
+"
+"{{{
+    " 使grep总是生成文件名
+    set grepprg=grep\ -nH\ $*
+    " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
+    let g:tex_flavor='latex'
+    set iskeyword+=:
+    let g:Tex_CompileRule_pdf='xelatex --shell-escape -interaction=nonstopmode $*'
+    let g:Imap_FreezeImap = 1
+
+"}}}
+"
+"{{{
+    let g:UltiSnipsExpandTrigger="<tab>"
+    " 使用 tab 切换下一个触发点，shit+tab 上一个触发点
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+    " 使用 UltiSnipsEdit 命令时垂直分割屏幕
 "}}}
