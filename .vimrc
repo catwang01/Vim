@@ -28,6 +28,9 @@ set ignorecase
 set nowrap
 "set wrap
 
+" conceal
+set conceallevel=0
+
 "{{{ 状态栏设置
 " 设置 laststatus = 0 ，不显式状态行
 " 设置 laststatus = 1 ，仅当窗口多于一个时，显示状态行
@@ -93,6 +96,17 @@ set fileencodings=ucs-bom,utf-8,cp936
 
 " 设置在状态行显示的信息
 
+function! checkPath()
+python << EOF
+def check():
+    autoloadpath = "~/.vim/autoload"
+    import os
+    if not os.path.exists(autoloadpath):
+        os.makedirs(autoloadpath)
+check()
+EOF
+endfunction
+
 let mapleader=','
 " Plugin
 call plug#begin('~/.vim/plugins')
@@ -113,15 +127,24 @@ Plug 'https://github.com/flazz/vim-colorschemes'
 Plug 'godlygeek/tabular'
 Plug 'skywind3000/asyncrun.vim'
 " Plug 'https://github.com/vim-scripts/vim-auto-save'
-"Plug 'skywind3000/asyncrun.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
 call plug#end()
 
 
 " {{{ NerdTree
     map ,n :NERDTreeToggle<cr>
+    let NERDTreeShowBookmarks=1
+    "设置忽略文件类型"
+    let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+    "窗口大小"
+    let NERDTreeWinSize=30
+
+    " 关闭vim时，如果打开的文件除了NERDTree没有其他文件时，就自动关闭
+    " [NERDTree插件（vim笔记三） - 简书](https://www.jianshu.com/p/eXMxGx)
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 " }}}
 
 " {{{ vim-colorschemes
@@ -255,20 +278,17 @@ nnoremap <space>l <c-w>l
 
 
 " {{{ vim-latex-preview
-autocmd Filetype tex setl updatetime=1000
-let g:livepreview_previewer = 'open -a skim'
-let g:livepreview_engine = 'xelatex --shell-escape'
-" }}}
-"
-"
-"{{{
-" 使grep总是生成文件名
-set grepprg=grep\ -nH\ $*
-" vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
-let g:tex_flavor='latex'
-set iskeyword+=:
-let g:Tex_CompileRule_pdf='xelatex --shell-escape -interaction=nonstopmode $*'
-let g:Imap_FreezeImap = 1
+    autocmd Filetype tex setl updatetime=1
+    let g:livepreview_previewer = 'open -a skim'
+    let g:livepreview_engine = 'xelatex --shell-escape'
+
+    " 使grep总是生成文件名
+    set grepprg=grep\ -nH\ $*
+    " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
+    let g:tex_flavor='latex'
+    set iskeyword+=:
+    let g:Tex_CompileRule_pdf='xelatex --shell-escape -interaction=nonstopmode $*'
+    let g:Imap_FreezeImap = 1
 "}}}
 "
 "
@@ -312,7 +332,6 @@ let g:Imap_FreezeImap = 1
 " }}}
 "
 " {{{ vim-markdown
-    set conceallevel=2
     let g:vim_markdown_conceal_code_blocks = 0
 " }}}
 "
