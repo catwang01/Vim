@@ -96,7 +96,7 @@ set fileencodings=ucs-bom,utf-8,cp936
 
 " 设置在状态行显示的信息
 
-function! checkPath()
+function! Checkpath()
 python << EOF
 def check():
     autoloadpath = "~/.vim/autoload"
@@ -106,6 +106,7 @@ def check():
 check()
 EOF
 endfunction
+call Checkpath()
 
 let mapleader=','
 " Plugin
