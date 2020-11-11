@@ -97,16 +97,36 @@ set fileencodings=ucs-bom,utf-8,cp936
 " 设置在状态行显示的信息
 
 function! Checkpath()
-python << EOF
-def check():
-    autoloadpath = "~/.vim/autoload"
-    import os
-    if not os.path.exists(autoloadpath):
-        os.makedirs(autoloadpath)
-check()
+python3 << EOF
+import os
+import vim
+def check(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print("{} has been created!".format(path))
+home = vim.eval("$HOME")
+autoloadpath = os.path.join(home, ".vim/autoload")
+backupdir= os.path.join(home, ".vim/backupfiles")
+check(autoloadpath)
+check(backupdir)
 EOF
 endfunction
 call Checkpath()
+
+function! DownloadVimPlug()
+python3 << EOF
+import os
+import vim
+import os
+autoloadpath = os.path.join(home, ".vim/autoload")
+downloadpath = os.path.join(autoloadpath, "plug.vim")
+if not os.path.exists(downloadpath): 
+    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    print("Downloading Vim Plug\n\n")
+    os.system("curl {} -o {}".format(url, downloadpath))
+EOF
+endfunction
+call DownloadVimPlug()
 
 let mapleader=','
 " Plugin
