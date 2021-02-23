@@ -97,7 +97,7 @@ set fileencodings=ucs-bom,utf-8,cp936
 " 设置在状态行显示的信息
 
 function! Checkpath()
-python3 << EOF
+pythonx << EOF
 import os
 import vim
 def check(path):
@@ -114,7 +114,7 @@ endfunction
 call Checkpath()
 
 function! DownloadVimPlug()
-python3 << EOF
+pythonx << EOF
 import os
 import vim
 import os
@@ -133,11 +133,11 @@ let mapleader=','
 call plug#begin('~/.vim/plugins')
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'Chiel92/vim-autoformat'
-Plug 'https://github.com/ycm-core/YouCompleteMe'
+"Plug 'https://github.com/ycm-core/YouCompleteMe'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'xuhdev/vim-latex-live-preview'
-Plug 'https://github.com/sirver/ultisnips'
+"Plug 'https://github.com/sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'https://github.com/dhruvasagar/vim-table-mode'
 Plug 'https://github.com/tpope/vim-surround'
@@ -151,7 +151,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'majutsushi/tagbar'
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 call plug#end()
 
 
@@ -314,19 +314,19 @@ nnoremap <space>l <c-w>l
 "
 "
 "{{{ UltiSnips
-    "let g:UltiSnipsExpandTrigger="<c-j>"
-    "" 使用 tab 切换下一个触发点，shit+tab 上一个触发点
-    "let g:UltiSnipsJumpForwardTrigger="<c-j>"
-    "let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+    ""let g:UltiSnipsExpandTrigger="<c-j>"
+    """ 使用 tab 切换下一个触发点，shit+tab 上一个触发点
+    ""let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    ""let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-    let g:UltiSnipsExpandTrigger="<tab>"
-    " 使用 tab 切换下一个触发点，shift+tab 上一个触发点
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+    "let g:UltiSnipsExpandTrigger="<tab>"
+    "" 使用 tab 切换下一个触发点，shift+tab 上一个触发点
+    "let g:UltiSnipsJumpForwardTrigger="<tab>"
+    "let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
-    let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/plugins/vim-snippets/UltiSnips"]
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
+    "let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/plugins/vim-snippets/UltiSnips"]
+    "" If you want :UltiSnipsEdit to split your window.
+    "let g:UltiSnipsEditSplit="vertical"
 "}}}
 
 " {{{
@@ -356,62 +356,62 @@ nnoremap <space>l <c-w>l
     let g:vim_markdown_conceal_code_blocks = 0
 " }}}
 "
-" {{{ YouCompleteMe
-    "let g:ycm_global_ycm_extra_conf = '~/.vim/plugins/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-    " 跳转到定义处
-    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> 
+"" {{{ YouCompleteMe
+    ""let g:ycm_global_ycm_extra_conf = '~/.vim/plugins/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+    "" 跳转到定义处
+    "nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> 
 
-    "set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
-    "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
-    ""上下左右键的行为 会显示其他信息
-    "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-    "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-    "inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-    "inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+    ""set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+    ""autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
+    ""inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
+    """上下左右键的行为 会显示其他信息
+    ""inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+    ""inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+    ""inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+    ""inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
-    "在注释输入中也能补全
-    let g:ycm_complete_in_comments = 1
-    "在字符串输入中也能补全
-    let g:ycm_complete_in_strings = 1
-    "注释和字符串中的文字也会被收入补全
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    ""在注释输入中也能补全
+    "let g:ycm_complete_in_comments = 1
+    ""在字符串输入中也能补全
+    "let g:ycm_complete_in_strings = 1
+    ""注释和字符串中的文字也会被收入补全
+    "let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-    function! g:UltiSnips_Complete()
-      call UltiSnips#ExpandSnippet()
-      if g:ulti_expand_res == 0
-        if pumvisible()
-          return "\<C-n>"
-        else
-          call UltiSnips#JumpForwards()
-          if g:ulti_jump_forwards_res == 0
-            return "\<TAB>"
-          endif
-        endif
-      endif
-      return ""
-    endfunction
+    "function! g:UltiSnips_Complete()
+      "call UltiSnips#ExpandSnippet()
+      "if g:ulti_expand_res == 0
+        "if pumvisible()
+          "return "\<C-n>"
+        "else
+          "call UltiSnips#JumpForwards()
+          "if g:ulti_jump_forwards_res == 0
+            "return "\<TAB>"
+          "endif
+        "endif
+      "endif
+      "return ""
+    "endfunction
 
-    function! g:UltiSnips_Reverse()
-      call UltiSnips#JumpBackwards()
-      if g:ulti_jump_backwards_res == 0
-        return "\<C-P>"
-      endif
+    "function! g:UltiSnips_Reverse()
+      "call UltiSnips#JumpBackwards()
+      "if g:ulti_jump_backwards_res == 0
+        "return "\<C-P>"
+      "endif
 
-      return ""
-    endfunction
+      "return ""
+    "endfunction
 
 
-    if !exists("g:UltiSnipsJumpForwardTrigger")
-      let g:UltiSnipsJumpForwardTrigger = "<tab>"
-    endif
-    if !exists("g:UltiSnipsJumpBackwardTrigger")
-      let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-    endif
+    "if !exists("g:UltiSnipsJumpForwardTrigger")
+      "let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    "endif
+    "if !exists("g:UltiSnipsJumpBackwardTrigger")
+      "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    "endif
 
-    au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
-    au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-" }}}
+    "au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+    "au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+"" }}}
 "
 " {{{ auto-format
     au BufWrite *.cpp :Autoformat
